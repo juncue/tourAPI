@@ -11,6 +11,7 @@ $(function () {
   getServiceCat1Data();
   getAreaCat1Data();
   $("#searchBtn").click(search);
+  $(".searchCancel-Btn").click(canselSearch);
 });
 
 $(document).on("change", "#serviceCat1", function () {
@@ -56,11 +57,22 @@ function search() {
   }
 }
 
+function canselSearch() {
+  $(".serviceCat1").remove();
+  $(".serviceCat2").remove();
+  $(".serviceCat3").remove();
+  $(".areaCat1").remove();
+  $(".areaCat2").remove();
+  getServiceCat1Data();
+  getAreaCat1Data();
+  $("#searchWord").val("");
+}
+
 function getInitData() {
   let url =
     AREA_BASE_SEARCH_URL +
     REQUIRED_PARMAS +
-    `&numOfRows=8&pageNo=1&listYN=Y&arrange=Q&contentTypeId=12`;
+    `&numOfRows=20&pageNo=1&listYN=Y&arrange=Q&contentTypeId=12`;
   //   $(".loading").show();
   $.ajax({
     url: url,
@@ -284,7 +296,7 @@ function getKeywordData(
   let url =
     KEYWORD_BASE_SEARCH_URL +
     REQUIRED_PARMAS +
-    `&numOfRows=8&pageNo=1&listYN=Y&arrange=Q&contentTypeId=12&`;
+    `&numOfRows=20&pageNo=1&listYN=Y&arrange=Q&contentTypeId=12&`;
   if (areaCat1 != "noValue") url += `&areaCode=${areaCat1}`;
   if (areaCat2 != "noValue") url += `&sigunguCode=${areaCat2}`;
   if (serviceCat1 != "noValue") url += `&cat1=${serviceCat1}`;
@@ -322,7 +334,7 @@ function getSearchData(
   let url =
     AREA_BASE_SEARCH_URL +
     REQUIRED_PARMAS +
-    `&numOfRows=8&pageNo=1&listYN=Y&arrange=Q&contentTypeId=12`;
+    `&numOfRows=20&pageNo=1&listYN=Y&arrange=Q&contentTypeId=12`;
   if (areaCat1 != "noValue") url += `&areaCode=${areaCat1}`;
   if (areaCat2 != "noValue") url += `&sigunguCode=${areaCat2}`;
   if (serviceCat1 != "noValue") url += `&cat1=${serviceCat1}`;
