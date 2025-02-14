@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script
+      src="https://kit.fontawesome.com/9bef4b10f4.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="js/touristAtrraction.js"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link href="css/touristAttraction.css" rel="stylesheet" />
+    <title>관광지 목록 페이지</title>
+  </head>
+  <body>
+    <div class="p-5 bg-primary text-white text-center topHeader">
+      <div class="title">
+        <h1>관광지 검색</h1>
+        <p>방문하시고자 하는 관광지를 검색하세요!</p>
+      </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html"
+              ><i class="fa-solid fa-house"></i
+            ></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="searchArea">
+      <div class="container search">
+        <div class="search-service">
+          <p class="searchTitle">서비스 분류</p>
+          <select
+            id="serviceCat1"
+            class="form-select form-select-lg mb-3 service"
+            aria-label=".form-select-lg example"
+          >
+            <option value="noValue" selected>대분류</option>
+          </select>
+          <select
+            id="serviceCat2"
+            class="form-select form-select-lg mb-3 service"
+            aria-label=".form-select-lg example"
+          >
+            <option value="noValue" selected>중분류</option>
+          </select>
+          <select
+            id="serviceCat3"
+            class="form-select form-select-lg mb-3 service"
+            aria-label=".form-select-lg example"
+          >
+            <option value="noValue" selected>소분류</option>
+          </select>
+        </div>
+
+        <div class="search-Area">
+          <p class="searchTitle">지역</p>
+          <select
+            id="areaCat1"
+            class="form-select form-select-lg mb-3 area"
+            aria-label=".form-select-lg example"
+          >
+            <option value="noValue" selected>광역시 / 도</option>
+          </select>
+          <select
+            id="areaCat2"
+            class="form-select form-select-lg mb-3 area"
+            aria-label=".form-select-lg example"
+          >
+            <option value="noValue" selected>시 / 군 / 구</option>
+          </select>
+        </div>
+
+        <div class="search-Word">
+          <p class="searchTitle">검색어 입력</p>
+          <div class="input-group mb-3 word">
+            <input
+              type="text"
+              id="searchWord"
+              class="form-control"
+              placeholder="검색어를 입력해주세요."
+              aria-describedby="basic-addon2"
+            />
+            <span class="input-group-text" id="basic-addon2"
+              ><i class="fa-solid fa-magnifying-glass"></i
+            ></span>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          id="searchBtn"
+          class="btn btn-success btn-lg search-Btn"
+        >
+          검색
+        </button>
+        <button type="button" class="btn btn-secondary btn-lg searchCancel-Btn">
+          검색 초기화
+        </button>
+      </div>
+    </div>
+
+    <div class="cardArea container">
+      <p>총 데이터 수 <span id="totalCount"></span>개</p>
+      <div class="row row-cols-1 row-cols-md-4 g-4" id="card"></div>
+    </div>
+
+    <div class="pageArea container">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+            </a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </body>
+</html>
