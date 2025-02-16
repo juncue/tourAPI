@@ -164,3 +164,84 @@ h1 {
   display: flex;
   justify-content: center;
 }
+
+.detailTitleArea {
+  padding: 50px 20px 20px 20px;
+  height: 450px;
+  background-color: blue;
+}
+
+.detailTitle{
+  font-size: 24px;
+  font-weight: bold;
+  position: relative;
+  height: 70px;
+  background-color: red;
+
+}
+
+.detailLike {
+  font-size: 26px;
+  font-weight: 600;
+  color: #1ab394;
+  position: absolute;
+  top:0;
+  right: 0;
+}
+
+#carouselExampleIndicators {
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+}
+.carousel-indicators img {
+  width: 100%;
+}
+
+.detailTabArea {
+  padding: 30px 20px 20px 40px;
+  background-color: green;
+  height: 450px;
+}
+
+
+.tab-content {
+  height: 340px;
+  padding: 10px;
+  font-size: 16px;
+  line-height: 28px;
+  text-indent: 10px;
+  background-color: pink;
+  overflow-y: auto;
+}
+
+.mapArea {
+  margin-top: 30px;
+}
+
+#map {
+  width: 100%;
+  height: 400px;
+}
+
+.mapTitle{
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.btnArea {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: space-around;
+
+}
+
+.kakao-Btn {
+  width: 48%;
+  border: none;
+}
+
+.list-Btn {
+  width: 48%;
+}
