@@ -49,6 +49,7 @@ $(function () {
 // 카드를 가져오는 함수
 function getCards(pageNo) {
   $("#card").empty();
+  // 쿼리스트링을 만들기 위해 검색 조건을 확인
   let params = [
     $("#areaCat1").val(),
     $("#areaCat2").val(),
@@ -93,6 +94,7 @@ function printCards(json) {
     let contentid = ele.contentid;
     let area1 = ele.addr1.split(" ")[0];
     let area2 = ele.addr1.split(" ")[1];
+    let likeArr = readCookie(); // 좋아요 체크 카드 표시
 
     output += `
         <div class="col">
@@ -100,11 +102,14 @@ function printCards(json) {
             <a href="${DETAIL_PAGE_URL}?contentid=${contentid}"><img src="${img}" class="card-img-top" alt="${title}" /></a>
             <div class="card-body">
               <small class="text-muted">${area1} | ${area2}</small>
-              <h5 class="card-title"><a href="${DETAIL_PAGE_URL}?contentid=${contentid}">${title}</a></h5>
-              <span id="${contentid}" class="like"><i class="fa-regular fa-heart"></i></span>
-            </div>
-          </div>
-        </div>`;
+              <h5 class="card-title"><a href="${DETAIL_PAGE_URL}?contentid=${contentid}">${title}</a></h5>`
+              
+    if (likeArr.indexOf(contentid) != -1) {
+      output +=`<span id="${contentid}" class="like" onclick="setLike(this);"><i class="fa-solid fa-heart"></i></span>`
+    } else {
+      output +=`<span id="${contentid}" class="like" onclick="setLike(this);"><i class="fa-regular fa-heart"></i></span>`
+    }                   
+    output +=`</div></div></div>`;
   });
   $("#card").append(output);
 }
@@ -228,4 +233,37 @@ function changePage(page) {
   );
 }
 
+function setLike(likeIcon) {
+  if (likeIcon.children[0].classList.contains("fa-regular")){
+    likeIcon.children[0].classList.remove("fa-regular");
+    likeIcon.children[0].classList.add("fa-solid");
+    saveCookie(`contentid${likeIcon.id}`, CONTENT_TYPE_ID, 1);
+  } else {
+    likeIcon.children[0].classList.add("fa-regular");
+    likeIcon.children[0].classList.remove("fa-solid");
+    saveCookie(`contentid${likeIcon.id}`, "", 0);
+  }
+}
+
+function saveCookie(cookieName, cookieValue, expYear) {
+  // expYear은 연단위
+  let now = new Date();
+  now.setFullYear(now.getFullYear() + expYear);
+
+  let tmpCookie =
+    cookieName + "=" + cookieValue + ";expires=" + now.toUTCString();
+  document.cookie = tmpCookie;
+}
+
+function readCookie() {
+  let cookArr = document.cookie.split("; ");
+  let likeArr = new Array();
+  $.each(cookArr, function(index, ele){
+    let cookName = ele.split("=")[0];
+    if (cookName.indexOf("contentid") != -1) {
+      likeArr.push(ele.split("=")[0].substring(9));
+    }
+  })
+  return likeArr;
+}
 
