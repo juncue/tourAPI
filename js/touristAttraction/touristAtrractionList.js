@@ -1,6 +1,3 @@
-const MY_KEY = `Mr%2FoLDV0QvesS1eTgQhWGB5QVE8m0cS4exeRvZdGXTV9HktCkhWBrEhPAMt2RYHN%2B2kvhbKkMka%2BK%2BgLlESbsA%3D%3D`;
-const CONTENT_TYPE_ID = 12;
-
 const AREA_CODE_URL = `http://apis.data.go.kr/B551011/KorService1/areaCode1`; // 3번 지역코드 조회
 const SERVICE_CATEGORY_URL = `http://apis.data.go.kr/B551011/KorService1/categoryCode1`; // 4번 서비스분류코드 조회
 const AREA_BASE_SEARCH_URL = `http://apis.data.go.kr/B551011/KorService1/areaBasedList1`; // 5번 지역기반 관광정보 조회
@@ -17,22 +14,6 @@ let PageGroupUnit = 10;
 let totalCount = 0;
 let totalPages = 0;
 let currentPage = 1;
-
-// ajax 요청 공통 함수
-function requestData(url, callback) {
-  $.ajax({
-    url: url,
-    type: "GET",
-    dataType: "json",
-    success: function (data) {
-      callback(data);
-    },
-    error: function (data) {
-      console.log(data.responseText);
-    },
-    complete: function () {},
-  });
-}
 
 $(function () {
   getCards(currentPage); // 페이지 로딩 시 전체 카드목록 조회
