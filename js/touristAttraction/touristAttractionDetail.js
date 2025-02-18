@@ -6,7 +6,12 @@ const DETAIL_IMAGE_URL = `http://apis.data.go.kr/B551011/KorService1/detailImage
 const REQUIRED_PARMAS = `?MobileOS=ETC&MobileApp=AppTest&serviceKey=${MY_KEY}&_type=json`;
 const FOR_SEARCH_PARAMS = `&contentTypeId=${CONTENT_TYPE_ID}&listYN=Y&arrange=Q`;
 
-let contentId = 129070;
+let contentId = getParameter("contentId");
+if (contentId == null) {
+  location.href = "touristAttractionList.html";
+}
+
+let likeArr = readCookie(); 
 
 let title = "";
 let overview = "";
@@ -35,6 +40,13 @@ $(function () {
   getDetailIntro(); //소개정보 가져오기
   getDetailInfo(); //반복정보 가져오기
   getDetailImage(); //이미지정보 가져오기
+
+  // 찜 여부 출력
+  if (likeArr.indexOf(contentId) != -1) {
+    $(".detailLike").children().eq(0).addClass("fa-solid");
+  } else {
+    $(".detailLike").children().eq(0).addClass("fa-regular");
+  }
 });
 
 function getDetailCommon() {
@@ -57,6 +69,7 @@ function getDetailCommon() {
     printTitle(title); // 타이틀 출력
     printOverview(overview); // 개요 출력
     printInfo(basicInfoTitle, basicInfoValue, "basicInfo"); // 기본정보 출력
+    printMap(mapx, mapy); // 지도 출력
   });
 }
 
@@ -165,4 +178,42 @@ function printImage(data) {
 
   $(".carousel-indicators").html(carouselIndicators);
   $(".carousel-inner").html(carouselInner);
+}
+
+function printMap(mapx, mapy) {
+  var mapContainer = document.getElementById("map"), // 지도를 표시할 div
+  mapOption = {
+    center: new kakao.maps.LatLng(mapy, mapx), // 지도의 중심좌표
+    level: 3, // 지도의 확대 레벨
+  };
+
+  var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+  // 마커가 표시될 위치입니다
+  var markerPosition = new kakao.maps.LatLng(mapy, mapx);
+
+  // 마커를 생성합니다
+  var marker = new kakao.maps.Marker({
+    position: markerPosition,
+  });
+
+  // 마커가 지도 위에 표시되도록 설정합니다
+  marker.setMap(map);
+
+  map.setZoomable(false);
+
+  // 지도 확대 축소를 제어할 수 있는  줌 컨트롤을 생성합니다
+  var zoomControl = new kakao.maps.ZoomControl();
+  map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+}
+
+function setLike(likeIcon) {
+  if (likeIcon.children[0].classList.contains("fa-regular")) {
+    likeIcon.children[0].classList.remove("fa-regular");
+    likeIcon.children[0].classList.add("fa-solid");
+    saveCookie(`like${contentId}`, CONTENT_TYPE_ID, 6);
+  } else {
+    likeIcon.children[0].classList.add("fa-regular");
+    likeIcon.children[0].classList.remove("fa-solid");
+    saveCookie(`like${contentId}`, "", 0);
+  }
 }

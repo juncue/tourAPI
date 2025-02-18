@@ -19,7 +19,7 @@ a:active {
 }
 .topHeader {
   position: relative;
-  background-image: url("../images/touristAttraction/tour.jpeg");
+  background-image: url("../../images/touristAttraction/tour.jpeg");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 0;

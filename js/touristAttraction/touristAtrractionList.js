@@ -103,10 +103,10 @@ function printCards(json) {
     output += `
         <div class="col">
           <div class="card h-100">
-            <a href="${DETAIL_PAGE_URL}?contentid=${contentid}"><img src="${img}" class="card-img-top" alt="${title}" /></a>
+            <a href="${DETAIL_PAGE_URL}?contentId=${contentid}"><img src="${img}" class="card-img-top" alt="${title}" /></a>
             <div class="card-body">
               <small class="text-muted">${area1} | ${area2}</small>
-              <h5 class="card-title"><a href="${DETAIL_PAGE_URL}?contentid=${contentid}">${title}</a></h5>`;
+              <h5 class="card-title"><a href="${DETAIL_PAGE_URL}?contentId=${contentid}">${title}</a></h5>`;
 
     if (likeArr.indexOf(contentid) != -1) {
       output += `<span id="${contentid}" class="like" onclick="setLike(this);"><i class="fa-solid fa-heart"></i></span>`;
@@ -252,32 +252,12 @@ function setLike(likeIcon) {
   if (likeIcon.children[0].classList.contains("fa-regular")) {
     likeIcon.children[0].classList.remove("fa-regular");
     likeIcon.children[0].classList.add("fa-solid");
-    saveCookie(`contentid${likeIcon.id}`, CONTENT_TYPE_ID, 1);
+    saveCookie(`like${likeIcon.id}`, CONTENT_TYPE_ID, 6);
   } else {
     likeIcon.children[0].classList.add("fa-regular");
     likeIcon.children[0].classList.remove("fa-solid");
-    saveCookie(`contentid${likeIcon.id}`, "", 0);
+    saveCookie(`like${likeIcon.id}`, "", 0);
   }
 }
 
-function saveCookie(cookieName, cookieValue, expYear) {
-  // expYear은 연단위
-  let now = new Date();
-  now.setFullYear(now.getFullYear() + expYear);
 
-  let tmpCookie =
-    cookieName + "=" + cookieValue + ";expires=" + now.toUTCString();
-  document.cookie = tmpCookie;
-}
-
-function readCookie() {
-  let cookArr = document.cookie.split("; ");
-  let likeArr = new Array();
-  $.each(cookArr, function (index, ele) {
-    let cookName = ele.split("=")[0];
-    if (cookName.indexOf("contentid") != -1) {
-      likeArr.push(ele.split("=")[0].substring(9));
-    }
-  });
-  return likeArr;
-}

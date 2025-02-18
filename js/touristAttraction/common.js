@@ -16,3 +16,44 @@ function requestData(url, callback) {
     complete: function () {},
   });
 }
+
+function getParameter(paramName) {
+  let returnVal = null;
+  let url = location.href;
+
+  if (url.indexOf("?") !== -1) {
+    // 쿼리스트링이 있는 경우
+    let queryStr = url.split("?")[1];
+    let queryStrArr = queryStr.split("&");
+
+    for (let item of queryStrArr) {
+      if (item.split("=")[0] == paramName) {
+        returnVal = item.split("=")[1];
+        break;
+      }
+    }
+  }
+  return returnVal;
+}
+
+function saveCookie(cookieName, cookieValue, expMonth) {
+  let now = new Date();
+  now.setMonth(now.getMonth() + expMonth);
+
+  let tmpCookie =
+    cookieName + "=" + cookieValue + ";expires=" + now.toUTCString();
+  document.cookie = tmpCookie;
+}
+
+function readCookie() {
+  let cookArr = document.cookie.split("; ");
+  let likeArr = new Array();
+  $.each(cookArr, function (index, ele) {
+    let cookName = ele.split("=")[0];
+    if (cookName.indexOf("like") != -1) {
+      likeArr.push(ele.split("=")[0].substring(4));
+    }
+  });
+  return likeArr;
+}
+
