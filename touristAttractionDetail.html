@@ -13,14 +13,15 @@
       type="text/javascript"
       src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=a71a8751e5612ffa85926cc64a7631a5"
     ></script>
-    <script src="js/touristAtrraction.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/touristAttractionDetail.js"></script>
 
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
     <link href="css/touristAttraction.css" rel="stylesheet" />
-    <title>관광지 목록 페이지</title>
+    <title>관광지 상세 페이지</title>
   </head>
   <body>
     <!-- 네비 바 -->
@@ -40,7 +41,7 @@
       <div class="row">
         <div class="col-md-5 detailTitleArea">
           <p class="detailTitle">
-            <span>여좌천로망스다리(로망스다리)</span>
+            <span id="detailTitle"></span>
             <span class="detailLike"><i class="fa-solid fa-heart"></i></span>
           </p>
           <div
@@ -124,12 +125,12 @@
             <li class="nav-item" role="presentation">
               <button
                 class="nav-link active"
-                id="summary-tab"
+                id="overview-tab"
                 data-bs-toggle="tab"
-                data-bs-target="#summary"
+                data-bs-target="#overview"
                 type="button"
                 role="tab"
-                aria-controls="summary"
+                aria-controls="overview"
                 aria-selected="true"
               >
                 개요
@@ -138,12 +139,12 @@
             <li class="nav-item" role="presentation">
               <button
                 class="nav-link"
-                id="home-tab"
+                id="basicInfo-tab"
                 data-bs-toggle="tab"
-                data-bs-target="#home"
+                data-bs-target="#basicInfo"
                 type="button"
                 role="tab"
-                aria-controls="home"
+                aria-controls="basicInfo"
                 aria-selected="false"
               >
                 기본 정보
@@ -152,12 +153,12 @@
             <li class="nav-item" role="presentation">
               <button
                 class="nav-link"
-                id="profile-tab"
+                id="notice-tab"
                 data-bs-toggle="tab"
-                data-bs-target="#profile"
+                data-bs-target="#notice"
                 type="button"
                 role="tab"
-                aria-controls="profile"
+                aria-controls="notice"
                 aria-selected="false"
               >
                 이용 안내
@@ -166,12 +167,12 @@
             <li class="nav-item" role="presentation">
               <button
                 class="nav-link"
-                id="contact-tab"
+                id="detailInfo-tab"
                 data-bs-toggle="tab"
-                data-bs-target="#contact"
+                data-bs-target="#detailInfo"
                 type="button"
                 role="tab"
-                aria-controls="contact"
+                aria-controls="detailInfo"
                 aria-selected="false"
               >
                 상세 정보
@@ -181,46 +182,28 @@
           <div class="tab-content" id="myTabContent">
             <div
               class="tab-pane fade show active"
-              id="summary"
+              id="overview"
               role="tabpanel"
-              aria-labelledby="summary-tab"
-            >
-              여좌천로망스다리는 2002년 방영되어 큰 사랑을 받은 드라마
-              <로망스>의 촬영지로 알려진 벚꽃 명소이다. 봄에는 벚꽃이 만발해
-              데이트 명소이자 인생 사진 촬영 명소로도 유명하다. 여좌천 옆으로
-              펼쳐진 약 1.5㎞의 데크 위로 벚꽃 터널이 형성되어 산책하며 벚꽃
-              나들이를 즐기기에 안성맞춤으로, 전국 각지에서 연인과 가족들이
-              몰려들어 인산인해를 이루는 명소이다. 로망스 다리에서 사랑을
-              고백하면 사랑이 이루어진다는 이야기도 전해지고 있으며, 경관조명
-              시설이 갖추어져 있어 늦은 밤에도 아름다운 벚꽃 세상을 누구나
-              자유롭게 만끽할 수 있다. 2023년 한국관광 100선에 선정되었으며,
-              진해역과 가까이에 위치해 찾기도 쉽고, 진해역 공영주차장을 무료로
-              이용할 수 있다.
-            </div>
-            <div
-              class="tab-pane fade show active"
-              id="home"
-              role="tabpanel"
-              aria-labelledby="home-tab"
-            >
-              ...
-            </div>
+              aria-labelledby="overview-tab"
+            ></div>
             <div
               class="tab-pane fade"
-              id="profile"
+              id="basicInfo"
               role="tabpanel"
-              aria-labelledby="profile-tab"
-            >
-              ...
-            </div>
+              aria-labelledby="basicInfo-tab"
+            ></div>
             <div
               class="tab-pane fade"
-              id="contact"
+              id="notice"
               role="tabpanel"
-              aria-labelledby="contact-tab"
-            >
-              ...
-            </div>
+              aria-labelledby="notice-tab"
+            ></div>
+            <div
+              class="tab-pane fade"
+              id="detailInfo"
+              role="tabpanel"
+              aria-labelledby="detailInfo-tab"
+            ></div>
           </div>
         </div>
 

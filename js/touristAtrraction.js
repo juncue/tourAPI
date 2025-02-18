@@ -1,18 +1,21 @@
 const MY_KEY = `Mr%2FoLDV0QvesS1eTgQhWGB5QVE8m0cS4exeRvZdGXTV9HktCkhWBrEhPAMt2RYHN%2B2kvhbKkMka%2BK%2BgLlESbsA%3D%3D`;
 const CONTENT_TYPE_ID = 12;
+
 const AREA_CODE_URL = `http://apis.data.go.kr/B551011/KorService1/areaCode1`; // 3번 지역코드 조회
 const SERVICE_CATEGORY_URL = `http://apis.data.go.kr/B551011/KorService1/categoryCode1`; // 4번 서비스분류코드 조회
 const AREA_BASE_SEARCH_URL = `http://apis.data.go.kr/B551011/KorService1/areaBasedList1`; // 5번 지역기반 관광정보 조회
 const KEYWORD_BASE_SEARCH_URL = `http://apis.data.go.kr/B551011/KorService1/searchKeyword1`; // 7번 키워드 검색 조회
+
 const REQUIRED_PARMAS = `?MobileOS=ETC&MobileApp=AppTest&serviceKey=${MY_KEY}&_type=json`;
-const FOR_SEARCH_PARAMS = `&contentTypeId=${CONTENT_TYPE_ID}&listYN=Y&arrange=Q`
+const FOR_SEARCH_PARAMS = `&contentTypeId=${CONTENT_TYPE_ID}&listYN=Y&arrange=Q`;
+
 const DETAIL_PAGE_URL = `touristAttractionDetail.html`;
 
 let numOfRows = 20;
 let PageGroupUnit = 10;
 
 let totalCount = 0;
-let totalPages = 0; 
+let totalPages = 0;
 let currentPage = 1;
 
 // ajax 요청 공통 함수
@@ -27,23 +30,20 @@ function requestData(url, callback) {
     error: function (data) {
       console.log(data.responseText);
     },
-    complete: function () {
-    },
+    complete: function () {},
   });
 }
 
 $(function () {
   getCards(currentPage); // 페이지 로딩 시 전체 카드목록 조회
-  getServiceCat1Data(); // 서비스 분류 셀렉트 박스 중 대분류 항목 조회 
-  getAreaCat1Data();  // 지역 셀렉트 박스 중 광역시/도 항목 조회
-  $("#searchBtn").click(function(){
+  getServiceCat1Data(); // 서비스 분류 셀렉트 박스 중 대분류 항목 조회
+  getAreaCat1Data(); // 지역 셀렉트 박스 중 광역시/도 항목 조회
+  $("#searchBtn").click(function () {
     currentPage = 1;
     getCards(currentPage);
-    $("html, body").animate(
-      { scrollTop: $("#cardArea").offset().top },500
-    );
-  });  // 검색 버튼 클릭 이벤트 리스너
-  $(".searchCancel-Btn").click(canselSearch);  // 검색초기화 버튼 클릭 이벤트 리스너
+    $("html, body").animate({ scrollTop: $("#cardArea").offset().top }, 500);
+  }); // 검색 버튼 클릭 이벤트 리스너
+  $(".searchCancel-Btn").click(canselSearch); // 검색초기화 버튼 클릭 이벤트 리스너
 });
 
 // 카드를 가져오는 함수
@@ -55,32 +55,52 @@ function getCards(pageNo) {
     $("#areaCat2").val(),
     $("#serviceCat1").val(),
     $("#serviceCat2").val(),
-    $("#serviceCat3").val()
-  ]
+    $("#serviceCat3").val(),
+  ];
   let keyword = $("#searchWord").val();
   if (keyword != "") {
     params.push(keyword);
-    let url = makeSearchUrl(KEYWORD_BASE_SEARCH_URL + REQUIRED_PARMAS + FOR_SEARCH_PARAMS + `&numOfRows=${numOfRows}&pageNo=${pageNo}`, params);
+    let url = makeSearchUrl(
+      KEYWORD_BASE_SEARCH_URL +
+        REQUIRED_PARMAS +
+        FOR_SEARCH_PARAMS +
+        `&numOfRows=${numOfRows}&pageNo=${pageNo}`,
+      params
+    );
     requestData(url, printCards);
   } else {
-    let url = makeSearchUrl(AREA_BASE_SEARCH_URL + REQUIRED_PARMAS + FOR_SEARCH_PARAMS + `&numOfRows=${numOfRows}&pageNo=${pageNo}`, params);
+    let url = makeSearchUrl(
+      AREA_BASE_SEARCH_URL +
+        REQUIRED_PARMAS +
+        FOR_SEARCH_PARAMS +
+        `&numOfRows=${numOfRows}&pageNo=${pageNo}`,
+      params
+    );
     requestData(url, printCards);
   }
 }
 
 // 쿼리스트링 만들어주는 함수
-function makeSearchUrl(url, params){
-  let paramNames = ["areaCode", "sigunguCode", "cat1", "cat2", "cat3", "keyword"]
-  $.each(params, function(index, ele){
-    if (ele != "noValue"){
-      url += `&${paramNames[index]}=${ele}`
+function makeSearchUrl(url, params) {
+  let paramNames = [
+    "areaCode",
+    "sigunguCode",
+    "cat1",
+    "cat2",
+    "cat3",
+    "keyword",
+  ];
+  $.each(params, function (index, ele) {
+    if (ele != "noValue") {
+      url += `&${paramNames[index]}=${ele}`;
     }
-  }) 
+  });
   return url;
 }
 
 // ajax로 받아온 카드데이터를 출력해주는 함수
 function printCards(json) {
+  console.log(json);
   // $(".loading").hide();
   totalCount = json.response.body.totalCount;
   totalPages = Math.ceil(totalCount / numOfRows);
@@ -89,7 +109,10 @@ function printCards(json) {
   let item = json.response.body.items.item;
   let output = "";
   $.each(item, function (index, ele) {
-    let img = (ele.firstimage != "")? ele.firstimage : `images/touristAttraction/no-image.jpeg`;
+    let img =
+      ele.firstimage != ""
+        ? ele.firstimage
+        : `images/touristAttraction/no-image.jpeg`;
     let title = ele.title;
     let contentid = ele.contentid;
     let area1 = ele.addr1.split(" ")[0];
@@ -102,14 +125,14 @@ function printCards(json) {
             <a href="${DETAIL_PAGE_URL}?contentid=${contentid}"><img src="${img}" class="card-img-top" alt="${title}" /></a>
             <div class="card-body">
               <small class="text-muted">${area1} | ${area2}</small>
-              <h5 class="card-title"><a href="${DETAIL_PAGE_URL}?contentid=${contentid}">${title}</a></h5>`
-              
+              <h5 class="card-title"><a href="${DETAIL_PAGE_URL}?contentid=${contentid}">${title}</a></h5>`;
+
     if (likeArr.indexOf(contentid) != -1) {
-      output +=`<span id="${contentid}" class="like" onclick="setLike(this);"><i class="fa-solid fa-heart"></i></span>`
+      output += `<span id="${contentid}" class="like" onclick="setLike(this);"><i class="fa-solid fa-heart"></i></span>`;
     } else {
-      output +=`<span id="${contentid}" class="like" onclick="setLike(this);"><i class="fa-regular fa-heart"></i></span>`
-    }                   
-    output +=`</div></div></div>`;
+      output += `<span id="${contentid}" class="like" onclick="setLike(this);"><i class="fa-regular fa-heart"></i></span>`;
+    }
+    output += `</div></div></div>`;
   });
   $("#card").append(output);
 }
@@ -126,40 +149,47 @@ function printSelectOptions(json, htmlSelector, className) {
 
 // 서비스 분류 셀렉트박스 데이터 조회
 function getServiceCat1Data() {
-  let url = SERVICE_CATEGORY_URL + REQUIRED_PARMAS + `&contentTypeId=${CONTENT_TYPE_ID}`;
-  requestData(url, function(data){
-    printSelectOptions(data, "#serviceCat1", "serviceCat1")
-  })
+  let url =
+    SERVICE_CATEGORY_URL +
+    REQUIRED_PARMAS +
+    `&contentTypeId=${CONTENT_TYPE_ID}`;
+  requestData(url, function (data) {
+    printSelectOptions(data, "#serviceCat1", "serviceCat1");
+  });
 }
 function getServiceCat2Data(code) {
   let url =
-    SERVICE_CATEGORY_URL + REQUIRED_PARMAS + `&contentTypeId=${CONTENT_TYPE_ID}&cat1=${code}`;
-  requestData(url, function(data){
-    printSelectOptions(data, "#serviceCat2", "serviceCat2")
-  })
+    SERVICE_CATEGORY_URL +
+    REQUIRED_PARMAS +
+    `&contentTypeId=${CONTENT_TYPE_ID}&cat1=${code}`;
+  requestData(url, function (data) {
+    printSelectOptions(data, "#serviceCat2", "serviceCat2");
+  });
 }
 function getServiceCat3Data(code) {
   let url =
     SERVICE_CATEGORY_URL +
     REQUIRED_PARMAS +
-    `&contentTypeId=${CONTENT_TYPE_ID}&cat1=${$("#serviceCat1").val()}&cat2=${code}`;
-  requestData(url, function(data){
-    printSelectOptions(data, "#serviceCat3", "serviceCat3")
-  })
+    `&contentTypeId=${CONTENT_TYPE_ID}&cat1=${$(
+      "#serviceCat1"
+    ).val()}&cat2=${code}`;
+  requestData(url, function (data) {
+    printSelectOptions(data, "#serviceCat3", "serviceCat3");
+  });
 }
 
 // 지역 셀렉트박스 데이터 조회
 function getAreaCat1Data() {
   let url = AREA_CODE_URL + REQUIRED_PARMAS + `&numOfRows=50`;
-  requestData(url, function(data){
+  requestData(url, function (data) {
     printSelectOptions(data, "#areaCat1", "areaCat1");
-  })
+  });
 }
 function getAreaCat2Data(code) {
   let url = AREA_CODE_URL + REQUIRED_PARMAS + `&areaCode=${code}&numOfRows=100`;
-  requestData(url, function(data){
+  requestData(url, function (data) {
     printSelectOptions(data, "#areaCat2", "areaCat2");
-  })
+  });
 }
 
 // 셀렉트 박스 변경에 대한 이벤트리스너
@@ -203,7 +233,9 @@ function printPagination() {
   let endPage = Math.min(startPage + PageGroupUnit - 1, totalPages); // 그룹의 마지막 페이지
   // 이전 버튼 생성
   if (currentPageGroup > 1) {
-    $(".pagination").append(`<li class="page-item" onclick="changePage(${startPage - 1})">
+    $(".pagination").append(`<li class="page-item" onclick="changePage(${
+      startPage - 1
+    })">
             <a class="page-link" href="javascript:void(0)" aria-label="Previous">
               <span aria-hidden="true">&laquo;</span>
             </a>
@@ -212,11 +244,15 @@ function printPagination() {
   // 페이지 번호 버튼 생성
   for (let i = startPage; i <= endPage; i++) {
     let activeClass = i == currentPage ? "active" : "";
-    $(".pagination").append(`<li class="page-item ${activeClass}" onclick="changePage(${i})"><a class="page-link" href="javascript:void(0)">${i}</a></li>`);
+    $(".pagination").append(
+      `<li class="page-item ${activeClass}" onclick="changePage(${i})"><a class="page-link" href="javascript:void(0)">${i}</a></li>`
+    );
   }
   // 다음 버튼 생성
   if (endPage < totalPages) {
-    $(".pagination").append(`<li class="page-item" onclick="changePage(${endPage + 1})">
+    $(".pagination").append(`<li class="page-item" onclick="changePage(${
+      endPage + 1
+    })">
             <a class="page-link" href="javascript:void(0)" aria-label="Next">
               <span aria-hidden="true">&raquo;</span>
             </a>
@@ -228,13 +264,11 @@ function changePage(page) {
   currentPage = page;
   getCards(currentPage);
   printPagination();
-  $("html, body").animate(
-    { scrollTop: $("#cardArea").offset().top },500
-  );
+  $("html, body").animate({ scrollTop: $("#cardArea").offset().top }, 500);
 }
 
 function setLike(likeIcon) {
-  if (likeIcon.children[0].classList.contains("fa-regular")){
+  if (likeIcon.children[0].classList.contains("fa-regular")) {
     likeIcon.children[0].classList.remove("fa-regular");
     likeIcon.children[0].classList.add("fa-solid");
     saveCookie(`contentid${likeIcon.id}`, CONTENT_TYPE_ID, 1);
@@ -258,12 +292,11 @@ function saveCookie(cookieName, cookieValue, expYear) {
 function readCookie() {
   let cookArr = document.cookie.split("; ");
   let likeArr = new Array();
-  $.each(cookArr, function(index, ele){
+  $.each(cookArr, function (index, ele) {
     let cookName = ele.split("=")[0];
     if (cookName.indexOf("contentid") != -1) {
       likeArr.push(ele.split("=")[0].substring(9));
     }
-  })
+  });
   return likeArr;
 }
-

@@ -131,7 +131,7 @@ h1 {
 .card img {
   width: 100%;
   height: 150px;
-  background-color:#eee;
+  background-color: #eee;
 }
 
 .card-title {
@@ -168,16 +168,13 @@ h1 {
 .detailTitleArea {
   padding: 50px 20px 20px 20px;
   height: 450px;
-  background-color: blue;
 }
 
-.detailTitle{
+.detailTitle {
   font-size: 24px;
   font-weight: bold;
   position: relative;
-  height: 70px;
-  background-color: red;
-
+  height: 50px;
 }
 
 .detailLike {
@@ -185,7 +182,7 @@ h1 {
   font-weight: 600;
   color: #1ab394;
   position: absolute;
-  top:0;
+  top: 0;
   right: 0;
 }
 
@@ -200,18 +197,15 @@ h1 {
 
 .detailTabArea {
   padding: 30px 20px 20px 40px;
-  background-color: green;
   height: 450px;
 }
 
-
 .tab-content {
   height: 340px;
-  padding: 10px;
-  font-size: 16px;
-  line-height: 28px;
+  padding: 30px 10px 10px 10px;
+  font-size: 17px;
+  line-height: 32px;
   text-indent: 10px;
-  background-color: pink;
   overflow-y: auto;
 }
 
@@ -224,7 +218,7 @@ h1 {
   height: 400px;
 }
 
-.mapTitle{
+.mapTitle {
   font-size: 20px;
   font-weight: bold;
 }
@@ -234,7 +228,6 @@ h1 {
   margin-bottom: 50px;
   display: flex;
   justify-content: space-around;
-
 }
 
 .kakao-Btn {
