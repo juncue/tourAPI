@@ -11,12 +11,14 @@ if (contentId == null) {
   location.href = "touristAttractionList.html";
 }
 
-let likeArr = readCookie(); 
+let likeArr = readCookie();
 
 let title = "";
 let overview = "";
 let mapx = "";
 let mapy = "";
+let addr = "";
+let img = "";
 
 let basicInfoTitle = ["홈페이지", "주소", "전화번호"];
 let basicInfoValue = new Array(3);
@@ -53,7 +55,7 @@ function getDetailCommon() {
   let url =
     DETAIL_COMMON_URL +
     REQUIRED_PARMAS +
-    `&contentId=${contentId}&defaultYN=Y&addrinfoYN=Y&mapinfoYN=Y&addrinfoYN=Y&mapinfoYN=Y&overviewYN=Y`;
+    `&contentId=${contentId}&defaultYN=Y&addrinfoYN=Y&firstImageYN=Y&mapinfoYN=Y&addrinfoYN=Y&mapinfoYN=Y&overviewYN=Y`;
   requestData(url, function (data) {
     console.log(data);
     let item = data.response.body.items.item[0];
@@ -61,6 +63,8 @@ function getDetailCommon() {
     overview = item.overview;
     mapx = item.mapx;
     mapy = item.mapy;
+    addr = item.addr1;
+    img = item.firstimage;
 
     basicInfoValue[0] = item.homepage;
     basicInfoValue[1] = item.addr1;
@@ -182,10 +186,10 @@ function printImage(data) {
 
 function printMap(mapx, mapy) {
   var mapContainer = document.getElementById("map"), // 지도를 표시할 div
-  mapOption = {
-    center: new kakao.maps.LatLng(mapy, mapx), // 지도의 중심좌표
-    level: 3, // 지도의 확대 레벨
-  };
+    mapOption = {
+      center: new kakao.maps.LatLng(mapy, mapx), // 지도의 중심좌표
+      level: 3, // 지도의 확대 레벨
+    };
 
   var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
   // 마커가 표시될 위치입니다
@@ -216,4 +220,50 @@ function setLike(likeIcon) {
     likeIcon.children[0].classList.remove("fa-solid");
     saveCookie(`like${contentId}`, "", 0);
   }
+}
+
+function shareMessage() {
+  Kakao.init("a71a8751e5612ffa85926cc64a7631a5"); // 사용하려는 앱의 JavaScript 키 입력
+  Kakao.Share.sendDefault({
+    objectType: "location",
+    address: addr,
+    addressTitle: addr,
+    content: {
+      title: title,
+      description: `${addr.split(" ")[0]} | ${addr.split(" ")[1]}`,
+      imageUrl: img,
+      link: {
+        // [내 애플리케이션] > [플랫폼] 에서 등록한 사이트 도메인과 일치해야 함
+        mobileWebUrl: "http://127.0.0.1:5500",
+        webUrl: "http://127.0.0.1:5500",
+      },
+    },
+    buttons: [
+      {
+        title: "웹으로 보기",
+        link: {
+          mobileWebUrl: `http://127.0.0.1:5500/project1/touristAttractionDetail.html?contentId=${contentId}`,
+          webUrl: `http://127.0.0.1:5500/project1/touristAttractionDetail.html?contentId=${contentId}`,
+        },
+      },
+    ],
+  });
+}
+
+function goBackListPage() {
+  let page = getParameter("page");
+  let params = [
+    getParameter("areaCode"),
+    getParameter("sigunguCode"),
+    getParameter("cat1"),
+    getParameter("cat2"),
+    getParameter("cat3"),
+    getParameter("keyword"),
+  ];
+  let url = makeSearchUrl(
+    SERVICE_URL + LIST_PAGE_URL + `?page=${page}`,
+    params
+  );
+  window.location.href = url.toString();
+  window.location.href = listPageUrl;
 }

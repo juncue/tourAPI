@@ -13,6 +13,11 @@
       type="text/javascript"
       src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=a71a8751e5612ffa85926cc64a7631a5"
     ></script>
+    <script
+      src="https://t1.kakaocdn.net/kakao_js_sdk/2.7.4/kakao.min.js"
+      integrity="sha384-DKYJZ8NLiK8MN4/C5P2dtSmLQ4KwPaoqAfyA/DfmEc1VDxu4yyC7wy6K1Hs90nka"
+      crossorigin="anonymous"
+    ></script>
     <script src="js/touristAttraction/common.js"></script>
     <script src="js/touristAttraction/touristAttractionDetail.js"></script>
 
@@ -51,51 +56,8 @@
             class="carousel slide"
             data-bs-ride="carousel"
           >
-            <div class="carousel-indicators">
-              <button
-                type="button"
-                data-bs-target="#carouselExampleIndicators"
-                data-bs-slide-to="0"
-                class="active"
-                aria-current="true"
-                aria-label="Slide 1"
-              ></button>
-              <button
-                type="button"
-                data-bs-target="#carouselExampleIndicators"
-                data-bs-slide-to="1"
-                aria-label="Slide 2"
-              ></button>
-              <button
-                type="button"
-                data-bs-target="#carouselExampleIndicators"
-                data-bs-slide-to="2"
-                aria-label="Slide 3"
-              ></button>
-            </div>
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img
-                  src="images/touristAttraction/no-image.jpeg"
-                  class="d-block w-100"
-                  alt="..."
-                />
-              </div>
-              <div class="carousel-item">
-                <img
-                  src="images/touristAttraction/no-image.jpeg"
-                  class="d-block w-100"
-                  alt="..."
-                />
-              </div>
-              <div class="carousel-item">
-                <img
-                  src="images/touristAttraction/no-image.jpeg"
-                  class="d-block w-100"
-                  alt="..."
-                />
-              </div>
-            </div>
+            <div class="carousel-indicators"></div>
+            <div class="carousel-inner"></div>
             <button
               class="carousel-control-prev"
               type="button"
@@ -219,10 +181,15 @@
             type="button"
             id="kakaoBtn"
             class="btn btn-warning btn-lg kakao-Btn"
+            onclick="shareMessage();"
           >
-            카카오톡 공유
+            <i class="fa-solid fa-comment"></i> &nbsp;카카오톡 공유
           </button>
-          <button type="button" class="btn btn-secondary btn-lg list-Btn">
+          <button
+            type="button"
+            class="btn btn-secondary btn-lg list-Btn"
+            onclick="goBackListPage();"
+          >
             목록
           </button>
         </div>

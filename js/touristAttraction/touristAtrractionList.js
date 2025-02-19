@@ -6,8 +6,6 @@ const KEYWORD_BASE_SEARCH_URL = `http://apis.data.go.kr/B551011/KorService1/sear
 const REQUIRED_PARMAS = `?MobileOS=ETC&MobileApp=AppTest&serviceKey=${MY_KEY}&_type=json`;
 const FOR_SEARCH_PARAMS = `&contentTypeId=${CONTENT_TYPE_ID}&listYN=Y&arrange=Q`;
 
-const DETAIL_PAGE_URL = `touristAttractionDetail.html`;
-
 let numOfRows = 20;
 let PageGroupUnit = 10;
 
@@ -16,10 +14,12 @@ let totalPages = 0;
 let currentPage = 1;
 
 $(function () {
+  checkParams();
   getCards(currentPage); // 페이지 로딩 시 전체 카드목록 조회
   getServiceCat1Data(); // 서비스 분류 셀렉트 박스 중 대분류 항목 조회
   getAreaCat1Data(); // 지역 셀렉트 박스 중 광역시/도 항목 조회
   $("#searchBtn").click(function () {
+    history.replaceState({}, null, location.pathname);
     currentPage = 1;
     getCards(currentPage);
     $("html, body").animate({ scrollTop: $("#cardArea").offset().top }, 500);
@@ -27,13 +27,23 @@ $(function () {
   $(".searchCancel-Btn").click(canselSearch); // 검색초기화 버튼 클릭 이벤트 리스너
 });
 
+function checkParams() {
+  let url = location.href;
+
+  if (url.indexOf("?") !== -1) {
+    // 쿼리스트링이 있는 경우
+    let queryStr = url.split("?")[1];
+    let queryStrArr = queryStr.split("&");
+  }
+}
+
 // 카드를 가져오는 함수
 function getCards(pageNo) {
   $("#card").empty();
   // 쿼리스트링을 만들기 위해 검색 조건을 확인
   let params = [
-    $("#areaCat1").val(),
-    $("#areaCat2").val(),
+    $("#areaCode").val(),
+    $("#sigunguCode").val(),
     $("#serviceCat1").val(),
     $("#serviceCat2").val(),
     $("#serviceCat3").val(),
@@ -61,24 +71,6 @@ function getCards(pageNo) {
   }
 }
 
-// 쿼리스트링 만들어주는 함수
-function makeSearchUrl(url, params) {
-  let paramNames = [
-    "areaCode",
-    "sigunguCode",
-    "cat1",
-    "cat2",
-    "cat3",
-    "keyword",
-  ];
-  $.each(params, function (index, ele) {
-    if (ele != "noValue") {
-      url += `&${paramNames[index]}=${ele}`;
-    }
-  });
-  return url;
-}
-
 // ajax로 받아온 카드데이터를 출력해주는 함수
 function printCards(json) {
   console.log(json);
@@ -102,11 +94,11 @@ function printCards(json) {
 
     output += `
         <div class="col">
-          <div class="card h-100">
-            <a href="${DETAIL_PAGE_URL}?contentId=${contentid}"><img src="${img}" class="card-img-top" alt="${title}" /></a>
+          <div class="card h-100" id="${contentid}" onclick="goDetailPage(this);">
+            <a href="javascript:void(0)"><img src="${img}" class="card-img-top" alt="${title}" /></a>
             <div class="card-body">
               <small class="text-muted">${area1} | ${area2}</small>
-              <h5 class="card-title"><a href="${DETAIL_PAGE_URL}?contentId=${contentid}">${title}</a></h5>`;
+              <h5 class="card-title"><a href="javascript:void(0);">${title}</a></h5>`;
 
     if (likeArr.indexOf(contentid) != -1) {
       output += `<span id="${contentid}" class="like" onclick="setLike(this);"><i class="fa-solid fa-heart"></i></span>`;
@@ -163,13 +155,13 @@ function getServiceCat3Data(code) {
 function getAreaCat1Data() {
   let url = AREA_CODE_URL + REQUIRED_PARMAS + `&numOfRows=50`;
   requestData(url, function (data) {
-    printSelectOptions(data, "#areaCat1", "areaCat1");
+    printSelectOptions(data, "#areaCode", "areaCat1");
   });
 }
 function getAreaCat2Data(code) {
   let url = AREA_CODE_URL + REQUIRED_PARMAS + `&areaCode=${code}&numOfRows=100`;
   requestData(url, function (data) {
-    printSelectOptions(data, "#areaCat2", "areaCat2");
+    printSelectOptions(data, "#sigunguCode", "areaCat2");
   });
 }
 
@@ -186,7 +178,7 @@ $(document).on("change", "#serviceCat2", function () {
     getServiceCat3Data($(this).val());
   }
 });
-$(document).on("change", "#areaCat1", function () {
+$(document).on("change", "#areaCode", function () {
   $(".areaCat2").remove();
   if ($(this).selectedIndex != 0) {
     getAreaCat2Data($(this).val());
@@ -260,4 +252,20 @@ function setLike(likeIcon) {
   }
 }
 
-
+function goDetailPage(card) {
+  console.log(card.id);
+  let params = [
+    $("#areaCode").val(),
+    $("#sigunguCode").val(),
+    $("#serviceCat1").val(),
+    $("#serviceCat2").val(),
+    $("#serviceCat3").val(),
+    $("#searchWord").val(),
+  ];
+  let url = makeSearchUrl(
+    SERVICE_URL + DETAIL_PAGE_URL + `?contentId=${card.id}&page=${currentPage}`,
+    params
+  );
+  console.log(url.toString());
+  window.location.href = url.toString();
+}

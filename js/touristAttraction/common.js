@@ -1,5 +1,8 @@
 const MY_KEY = `Mr%2FoLDV0QvesS1eTgQhWGB5QVE8m0cS4exeRvZdGXTV9HktCkhWBrEhPAMt2RYHN%2B2kvhbKkMka%2BK%2BgLlESbsA%3D%3D`;
 const CONTENT_TYPE_ID = 12;
+const SERVICE_URL = "http://127.0.0.1:5500/project_1/";
+const LIST_PAGE_URL = `touristAttractionList.html`;
+const DETAIL_PAGE_URL = `touristAttractionDetail.html`;
 
 // ajax 요청 공통 함수
 function requestData(url, callback) {
@@ -15,6 +18,24 @@ function requestData(url, callback) {
     },
     complete: function () {},
   });
+}
+
+// 쿼리스트링 만들어주는 함수
+function makeSearchUrl(url, params) {
+  let paramNames = [
+    "areaCode",
+    "sigunguCode",
+    "cat1",
+    "cat2",
+    "cat3",
+    "keyword",
+  ];
+  $.each(params, function (index, ele) {
+    if (ele != "noValue") {
+      url += `&${paramNames[index]}=${ele}`;
+    }
+  });
+  return url;
 }
 
 function getParameter(paramName) {
@@ -56,4 +77,3 @@ function readCookie() {
   });
   return likeArr;
 }
-
