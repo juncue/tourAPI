@@ -633,7 +633,7 @@ section,
 }
 
 /*--------------------------------------------------------------
-# Hero Section
+# 통합검색 Section
 --------------------------------------------------------------*/
 .hero {
   width: 100%;
@@ -771,7 +771,7 @@ section,
 }
 
 /*--------------------------------------------------------------
-# About Section
+# About Section - 불필요
 --------------------------------------------------------------*/
 .about .content .who-we-are {
   text-transform: uppercase;
@@ -882,7 +882,7 @@ section,
 .services .service-item p {
   line-height: 24px;
   font-size: 20px;
-  margin-bottom: 0;
+  margin-bottom: 10px;
 }
 
 @media (min-width: 1365px) {
@@ -897,7 +897,7 @@ section,
 }
 
 /*--------------------------------------------------------------
-# Features Section
+# Features Section - 불필요
 --------------------------------------------------------------*/
 .features .feature-box {
   background-color: var(--surface-color);
@@ -930,7 +930,7 @@ section,
 }
 
 /*--------------------------------------------------------------
-# Pricing Section
+# 찜목록 Section
 --------------------------------------------------------------*/
 .pricing .pricing-tem {
   
@@ -1037,7 +1037,7 @@ section,
 }
 
 /*--------------------------------------------------------------
-# Faq Section
+# Faq Section - 불필요
 --------------------------------------------------------------*/
 .faq .content h3 {
   font-weight: 400;
@@ -1126,7 +1126,7 @@ section,
 }
 
 /*--------------------------------------------------------------
-# Contact Section
+# Contact Section - 불필요
 --------------------------------------------------------------*/
 .contact .info-item+.info-item {
   margin-top: 40px;
@@ -1206,7 +1206,7 @@ section,
 }
 
 /*--------------------------------------------------------------
-# Service Details Section
+# Service Details Section - 불필요
 --------------------------------------------------------------*/
 .service-details .service-box {
   background-color: var(--surface-color);
