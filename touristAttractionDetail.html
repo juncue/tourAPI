@@ -25,22 +25,42 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
+    <link href="css/main/main.css" rel="stylesheet" />
     <link href="css/touristAttraction/touristAttraction.css" rel="stylesheet" />
     <title>관광지 상세 페이지</title>
   </head>
   <body>
-    <!-- 네비 바 -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container-fluid">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="touristAttractionList.html"
-              ><i class="fa-solid fa-arrow-left"></i
-            ></a>
-          </li>
-        </ul>
+    <header
+      id="header"
+      class="header d-flex align-items-center sticky-top"
+      style="height: 80px"
+    >
+      <div
+        class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between"
+      >
+        <a href="index.html" class="logo d-flex align-items-center">
+          <h1 class="sitename"><span>goott</span>Academy5</h1>
+        </a>
+
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li><a href="index.html" class="active">Home</a></li>
+            <li class="dropdown">
+              <a href="#"
+                ><span>Category</span> <i class="fa-solid fa-caret-down"></i
+              ></a>
+              <ul>
+                <li><a href="#">관광지</a></li>
+                <li><a href="#">Dropdown 2</a></li>
+                <li><a href="#">Dropdown 3</a></li>
+                <li><a href="#">Dropdown 4</a></li>
+              </ul>
+            </li>
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
       </div>
-    </nav>
+    </header>
 
     <div class="container">
       <div class="row">

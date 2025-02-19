@@ -1,6 +1,6 @@
 const MY_KEY = `Mr%2FoLDV0QvesS1eTgQhWGB5QVE8m0cS4exeRvZdGXTV9HktCkhWBrEhPAMt2RYHN%2B2kvhbKkMka%2BK%2BgLlESbsA%3D%3D`;
 const CONTENT_TYPE_ID = 12;
-const SERVICE_URL = "http://127.0.0.1:5500/project_1/";
+const SERVICE_URL = "http://127.0.0.1:5500/";
 const LIST_PAGE_URL = `touristAttractionList.html`;
 const DETAIL_PAGE_URL = `touristAttractionDetail.html`;
 
@@ -39,7 +39,7 @@ function makeSearchUrl(url, params) {
 }
 
 function getParameter(paramName) {
-  let returnVal = null;
+  let returnVal = "";
   let url = location.href;
 
   if (url.indexOf("?") !== -1) {

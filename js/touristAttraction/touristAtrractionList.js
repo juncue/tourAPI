@@ -14,7 +14,6 @@ let totalPages = 0;
 let currentPage = 1;
 
 $(function () {
-  checkParams();
   getCards(currentPage); // 페이지 로딩 시 전체 카드목록 조회
   getServiceCat1Data(); // 서비스 분류 셀렉트 박스 중 대분류 항목 조회
   getAreaCat1Data(); // 지역 셀렉트 박스 중 광역시/도 항목 조회
@@ -27,18 +26,9 @@ $(function () {
   $(".searchCancel-Btn").click(canselSearch); // 검색초기화 버튼 클릭 이벤트 리스너
 });
 
-function checkParams() {
-  let url = location.href;
-
-  if (url.indexOf("?") !== -1) {
-    // 쿼리스트링이 있는 경우
-    let queryStr = url.split("?")[1];
-    let queryStrArr = queryStr.split("&");
-  }
-}
-
 // 카드를 가져오는 함수
 function getCards(pageNo) {
+  console.log("::::::::::")
   $("#card").empty();
   // 쿼리스트링을 만들기 위해 검색 조건을 확인
   let params = [
@@ -94,11 +84,11 @@ function printCards(json) {
 
     output += `
         <div class="col">
-          <div class="card h-100" id="${contentid}" onclick="goDetailPage(this);">
-            <a href="javascript:void(0)"><img src="${img}" class="card-img-top" alt="${title}" /></a>
+          <div class="card h-100" >
+            <a href="javascript:void(0)"><img src="${img}" id="${contentid}" class="card-img-top" alt="${title}" onclick="goDetailPage(this);" /></a>
             <div class="card-body">
               <small class="text-muted">${area1} | ${area2}</small>
-              <h5 class="card-title"><a href="javascript:void(0);">${title}</a></h5>`;
+              <h5 id="${contentid}" class="card-title" onclick="goDetailPage(this);"><a href="javascript:void(0);">${title}</a></h5>`;
 
     if (likeArr.indexOf(contentid) != -1) {
       output += `<span id="${contentid}" class="like" onclick="setLike(this);"><i class="fa-solid fa-heart"></i></span>`;
@@ -253,7 +243,6 @@ function setLike(likeIcon) {
 }
 
 function goDetailPage(card) {
-  console.log(card.id);
   let params = [
     $("#areaCode").val(),
     $("#sigunguCode").val(),

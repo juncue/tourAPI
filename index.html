@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Tour API - index</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Favicons -->
+    <link href="img/main/favicon.png" rel="icon" />
+    <link href="img/main/apple-touch-icon.png" rel="apple-touch-icon" />
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/9bef4b10f4.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Vendor CSS Files -->
+    <link href="css/main/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/main/bootstrap-icons.css" rel="stylesheet" />
+    <link href="css/main/aos/aos.css" rel="stylesheet" />
+    <link href="css/main/glightbox.min.css" rel="stylesheet" />
+
+    <!-- Main CSS File -->
+    <link href="css/main/main.css" rel="stylesheet" />
+  </head>
+
+  <body class="index-page">
+    <header
+      id="header"
+      class="header d-flex align-items-center sticky-top"
+      style="height: 80px"
+    >
+      <div
+        class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between"
+      >
+        <a href="index.html" class="logo d-flex align-items-center">
+          <h1 class="sitename"><span>goott</span>Academy5</h1>
+        </a>
+
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li><a href="index.html" class="active">Home</a></li>
+            <li class="dropdown">
+              <a href="#"
+                ><span>Category</span> <i class="fa-solid fa-caret-down"></i
+              ></a>
+              <ul>
+                <li><a href="#">관광지</a></li>
+                <li><a href="#">Dropdown 2</a></li>
+                <li><a href="#">Dropdown 3</a></li>
+                <li><a href="#">Dropdown 4</a></li>
+              </ul>
+            </li>
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+      </div>
+    </header>
+
+    <main class="main">
+      <!-- 통합검색 및 최신관광 컨텐츠 Section -->
+      <section id="hero" class="hero section light-background">
+        <div
+          class="container position-relative"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
+          <div class="row gy-5">
+            <div
+              class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center"
+            >
+              <h2>Tour API &nbsp; ver 1.0</h2>
+              <p>
+                관광 정보, 사진 등의 데이터를 실시간 Open API를 통해 제공하고
+                있습니다.
+              </p>
+              <div class="d-flex">
+                <div class="col-md-12">
+                  <input
+                    type="text"
+                    name="search"
+                    class="form-control"
+                    placeholder="검색어를 입력하세요."
+                    required=""
+                  />
+                </div>
+              </div>
+              <div>
+                <a href="#" class="btn-get-started">통합 검색</a>
+              </div>
+            </div>
+            <div class="col-lg-6 order-1 order-lg-2">
+              <img src="img/main/mainImg.png" class="img-fluid" alt="" />
+            </div>
+          </div>
+        </div>
+        <div
+          class="icon-boxes position-relative"
+          data-aos="fade-up"
+          data-aos-delay="200"
+        >
+          <div class="container position-relative">
+            <div class="row gy-4 mt-5">
+              <h3>최신 관광 콘텐츠</h3>
+              <div class="col-xl-3 col-md-6">
+                <div class="icon-box">
+                  <div class="category">관광지</div>
+                  <h4 class="title">
+                    <a href="" class="stretched-link">정도마을</a>
+                  </h4>
+                </div>
+              </div>
+              <!--End Contents Box -->
+
+              <div class="col-xl-3 col-md-6">
+                <div class="icon-box">
+                  <div class="category">관광지</div>
+                  <h4 class="title">
+                    <a href="" class="stretched-link">동명마을</a>
+                  </h4>
+                </div>
+              </div>
+              <!--End Contents Box -->
+
+              <div class="col-xl-3 col-md-6">
+                <div class="icon-box">
+                  <div class="category">관광지</div>
+                  <h4 class="title">
+                    <a href="" class="stretched-link">구시포마을</a>
+                  </h4>
+                </div>
+              </div>
+              <!--End Contents Box -->
+
+              <div class="col-xl-3 col-md-6">
+                <div class="icon-box">
+                  <div class="category">관광지</div>
+                  <h4 class="title">
+                    <a href="" class="stretched-link">가천 다랭이마을</a>
+                  </h4>
+                </div>
+              </div>
+              <!--End Contents Box -->
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- /통합검색 및 최신관광 컨텐츠 Section -->
+
+      <!-- Services Section -->
+      <section id="services" class="services section">
+        <!-- Section Title -->
+        <div class="container section-title" data-aos="fade-up">
+          <h2>Services</h2>
+          <div>
+            <span>Check Our</span>
+            <span class="description-title">Services</span>
+          </div>
+        </div>
+        <!-- End Section Title -->
+
+        <div class="container">
+          <div class="row gy-4">
+            <div
+              class="col-lg-4 col-md-6"
+              data-aos="fade-up"
+              data-aos-delay="100"
+            >
+              <div class="service-item position-relative">
+                <div class="icon">
+                  <img src="img/main/tourist.png" />
+                </div>
+                <a href="#" class="stretched-link">
+                  <h3>관광지</h3>
+                </a>
+                <p>made by 준규</p>
+              </div>
+            </div>
+            <!-- End Service Item -->
+
+            <div
+              class="col-lg-4 col-md-6"
+              data-aos="fade-up"
+              data-aos-delay="200"
+            >
+              <div class="service-item position-relative">
+                <div class="icon">
+                  <img src="img/main/culture.png" />
+                </div>
+                <a href="#" class="stretched-link">
+                  <h3>문화시설</h3>
+                </a>
+                <p>made by 인수</p>
+              </div>
+            </div>
+            <!-- End Service Item -->
+
+            <div
+              class="col-lg-4 col-md-6"
+              data-aos="fade-up"
+              data-aos-delay="300"
+            >
+              <div class="service-item position-relative">
+                <div class="icon">
+                  <img src="img/main/festival.png" />
+                </div>
+                <a href="#" class="stretched-link">
+                  <h3>축제공연행사</h3>
+                </a>
+                <p>made by 유진</p>
+              </div>
+            </div>
+            <!-- End Service Item -->
+
+            <div
+              class="col-lg-4 col-md-6"
+              data-aos="fade-up"
+              data-aos-delay="400"
+            >
+              <div class="service-item position-relative">
+                <div class="icon">
+                  <img src="img/main/tourist.png" />
+                </div>
+                <a href="#" class="stretched-link">
+                  <h3>여행코스</h3>
+                </a>
+                <p>made by 성현</p>
+              </div>
+            </div>
+            <!-- End Service Item -->
+
+            <div
+              class="col-lg-4 col-md-6"
+              data-aos="fade-up"
+              data-aos-delay="500"
+            >
+              <div class="service-item position-relative">
+                <div class="icon">
+                  <img src="img/main/reports.png" />
+                </div>
+                <a href="#" class="stretched-link">
+                  <h3>레포츠</h3>
+                </a>
+                <p>made by 성욱</p>
+              </div>
+            </div>
+            <!-- End Service Item -->
+
+            <div
+              class="col-lg-4 col-md-6"
+              data-aos="fade-up"
+              data-aos-delay="600"
+            >
+              <div class="service-item position-relative">
+                <div class="icon">
+                  <img src="img/main/accommodation.png" />
+                </div>
+                <a href="#" class="stretched-link">
+                  <h3>숙박</h3>
+                </a>
+                <p>made by 강</p>
+                <a href="#" class="stretched-link"></a>
+              </div>
+            </div>
+            <!-- End Service Item -->
+
+            <div
+              class="col-lg-4 col-md-6"
+              data-aos="fade-up"
+              data-aos-delay="700"
+            >
+              <div class="service-item position-relative">
+                <div class="icon">
+                  <img src="img/main/shopping.png" />
+                </div>
+                <a href="#" class="stretched-link">
+                  <h3>쇼핑</h3>
+                </a>
+                <p>made by 소미</p>
+                <a href="#" class="stretched-link"></a>
+              </div>
+            </div>
+            <!-- End Service Item -->
+
+            <div
+              class="col-lg-4 col-md-6"
+              data-aos="fade-up"
+              data-aos-delay="800"
+            >
+              <div class="service-item position-relative">
+                <div class="icon">
+                  <img src="img/main/restaurant.png" />
+                </div>
+                <a href="#" class="stretched-link">
+                  <h3>음식점</h3>
+                </a>
+                <p>made by 종원</p>
+                <a href="#" class="stretched-link"></a>
+              </div>
+            </div>
+            <!-- End Service Item -->
+
+            <div
+              class="col-lg-4 col-md-6"
+              data-aos="fade-up"
+              data-aos-delay="900"
+            >
+              <div class="service-item position-relative">
+                <div class="icon">
+                  <img src="img/main/restaurant.png" />
+                </div>
+                <a href="#" class="stretched-link">
+                  <h3>반려동물</h3>
+                </a>
+                <p>made by 영재</p>
+                <a href="#" class="stretched-link"></a>
+              </div>
+            </div>
+            <!-- End Service Item -->
+          </div>
+        </div>
+      </section>
+      <!-- /Services Section -->
+
+      <!-- 찜 목록 Section -->
+      <section id="pricing" class="pricing section light-background">
+        <!-- Section Title -->
+        <div class="container section-title" data-aos="fade-up">
+          <h2>찜한 목록</h2>
+          <div>
+            <span>Check Your</span>
+            <span class="description-title">Favorites</span>
+          </div>
+        </div>
+        <!-- End Section Title -->
+
+        <div class="container">
+          <div class="row gy-4">
+            <div
+              class="col-lg-3 col-md-6"
+              data-aos="zoom-in"
+              data-aos-delay="100"
+            >
+              <div class="pricing-tem">
+                <h3 style="color: #20c997">관광지</h3>
+                <div>사진</div>
+
+                <h4>정도마을</h4>
+                <a href="#" class="btn-buy">자세히 보기</a>
+              </div>
+            </div>
+            <!-- End 찜 Item -->
+
+            <div
+              class="col-lg-3 col-md-6"
+              data-aos="zoom-in"
+              data-aos-delay="100"
+            >
+              <div class="pricing-tem">
+                <h3 style="color: #0dcaf0">음식점</h3>
+                <div>사진</div>
+
+                <h4>힐링스페이스카페</h4>
+                <a href="#" class="btn-buy">자세히 보기</a>
+              </div>
+            </div>
+            <!-- End 찜 Item -->
+
+            <div
+              class="col-lg-3 col-md-6"
+              data-aos="zoom-in"
+              data-aos-delay="100"
+            >
+              <div class="pricing-tem">
+                <h3 style="color: #fd7e14">문화시설</h3>
+                <div>사진</div>
+
+                <h4>손기정문화도서관</h4>
+                <a href="#" class="btn-buy">자세히 보기</a>
+              </div>
+            </div>
+            <!-- End 찜 Item -->
+
+            <div
+              class="col-lg-3 col-md-6"
+              data-aos="zoom-in"
+              data-aos-delay="100"
+            >
+              <div class="pricing-tem">
+                <h3 style="color: #0d6efd">문화시설</h3>
+                <div>사진</div>
+
+                <h4>통영 섬탄다</h4>
+                <a href="#" class="btn-buy">자세히 보기</a>
+              </div>
+            </div>
+            <!-- End 찜 Item -->
+          </div>
+          <!-- End 찜 row -->
+        </div>
+      </section>
+      <!-- /찜 목록 Section -->
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="container">
+        <div class="copyright text-center">
+          <p>
+            © <span>Copyright</span>
+            <strong class="px-1 sitename">goottAcademy5</strong>
+            <span>All Rights Reserved</span>
+          </p>
+        </div>
+
+        <div class="credits">
+          <!-- All the links in the footer should remain intact. -->
+          <!-- You can delete the links only if you've purchased the pro version. -->
+          <!-- Licensing information: https://bootstrapmade.com/license/ -->
+          <!-- Purchase the pro version with working PHP/AJAX contact form: [buy-url] -->
+          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scroll Top -->
+    <a
+      href="#"
+      id="scroll-top"
+      class="scroll-top d-flex align-items-center justify-content-center"
+      ><i class="fa-solid fa-arrow-up"></i
+    ></a>
+
+    <!-- Preloader -->
+    <div id="preloader"></div>
+
+    <!-- Vendor JS Files -->
+    <script src="js/main/bootstrap.bundle.min.js"></script>
+    <script src="js/main/aos.js"></script>
+    <script src="js/main/glightbox.min.js"></script>
+
+    <!-- Main JS File -->
+    <script src="js/main/main.js"></script>
+  </body>
+</html>
