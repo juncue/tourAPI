@@ -14,9 +14,14 @@ let totalPages = 0;
 let currentPage = 1;
 
 $(function () {
-  getCards(currentPage); // 페이지 로딩 시 전체 카드목록 조회
-  getServiceCat1Data(); // 서비스 분류 셀렉트 박스 중 대분류 항목 조회
-  getAreaCat1Data(); // 지역 셀렉트 박스 중 광역시/도 항목 조회
+  let url = location.href;
+  if (url.indexOf("?") !== -1) {
+    checkParams(url);
+  } else {
+    getCards(currentPage); // 페이지 로딩 시 전체 카드목록 조회
+    getServiceCat1Data(); // 서비스 분류 셀렉트 박스 중 대분류 항목 조회
+    getAreaCat1Data(); // 지역 셀렉트 박스 중 광역시/도 항목 조회
+  }
   $("#searchBtn").click(function () {
     history.replaceState({}, null, location.pathname);
     currentPage = 1;
@@ -28,7 +33,7 @@ $(function () {
 
 // 카드를 가져오는 함수
 function getCards(pageNo) {
-  console.log("::::::::::")
+  console.log("::::::::::");
   $("#card").empty();
   // 쿼리스트링을 만들기 위해 검색 조건을 확인
   let params = [
@@ -75,7 +80,7 @@ function printCards(json) {
     let img =
       ele.firstimage != ""
         ? ele.firstimage
-        : `images/touristAttraction/no-image.jpeg`;
+        : `img/touristAttraction/no-image.jpeg`;
     let title = ele.title;
     let contentid = ele.contentid;
     let area1 = ele.addr1.split(" ")[0];
@@ -252,9 +257,57 @@ function goDetailPage(card) {
     $("#searchWord").val(),
   ];
   let url = makeSearchUrl(
-    SERVICE_URL + DETAIL_PAGE_URL + `?contentId=${card.id}&page=${currentPage}`,
+    SERVICE_URL +
+      DETAIL_PAGE_URL +
+      `?contentId=${card.id}&pageNo=${currentPage}`,
     params
   );
   console.log(url.toString());
   window.location.href = url.toString();
+}
+
+function checkParams(url) {
+  console.log(url);
+  let queryStr = url.split("?")[1];
+  let queryStrArr = queryStr.split("&");
+
+  let keyword = getParameter("keyword");
+  currentPage = queryStrArr[0].split("=")[1];
+  $("#searchWord").val(decodeURI(queryStrArr[6].split("=")[1]));
+  if (keyword != "") {
+    let url =
+      KEYWORD_BASE_SEARCH_URL +
+      REQUIRED_PARMAS +
+      FOR_SEARCH_PARAMS +
+      `&numOfRows=${numOfRows}&${queryStr}`;
+    console.log(url);
+    requestData(url, printCards);
+  } else {
+    let params = queryStr.split("&keyword=")[0];
+    let url =
+      AREA_BASE_SEARCH_URL +
+      REQUIRED_PARMAS +
+      FOR_SEARCH_PARAMS +
+      `&numOfRows=${numOfRows}&${params}`;
+    requestData(url, printCards);
+  }
+
+  getAreaCat1Data();
+  getServiceCat1Data();
+  if (queryStrArr[1].split("=")[1] != "") {
+    console.log("=================");
+    getAreaCat2Data(queryStrArr[1].split("=")[1]);
+    console.log(queryStrArr[1].split("=")[1]);
+    console.log($("#areaCode option[value=noValue]"));
+    console.log(
+      $("#areaCode option[value=" + queryStrArr[1].split("=")[1] + "]")
+    );
+    $("#areaCode option[value=noValue]").attr("selected", false);
+    $("#areaCode option[value=noValue]").attr("selected", false);
+
+    $("#areaCode option[value=" + queryStrArr[1].split("=")[1] + "]").attr(
+      "selected",
+      true
+    );
+  }
 }

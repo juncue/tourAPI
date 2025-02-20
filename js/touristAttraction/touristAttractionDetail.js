@@ -251,7 +251,7 @@ function shareMessage() {
 }
 
 function goBackListPage() {
-  let page = getParameter("page");
+  let page = getParameter("pageNo");
   let params = [
     getParameter("areaCode"),
     getParameter("sigunguCode"),
@@ -261,7 +261,7 @@ function goBackListPage() {
     getParameter("keyword"),
   ];
   let url = makeSearchUrl(
-    SERVICE_URL + LIST_PAGE_URL + `?page=${page}`,
+    SERVICE_URL + LIST_PAGE_URL + `?pageNo=${page}`,
     params
   );
   window.location.href = url.toString();
