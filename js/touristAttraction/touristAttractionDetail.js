@@ -121,7 +121,7 @@ function getDetailImage() {
     `&contentId=${contentId}&imageYN=Y&subImageYN=Y`;
   requestData(url, function (data) {
     console.log(data);
-    let items = data.response.body.items.item;
+    let items = data.response.body.items;
 
     printImage(items);
   });
@@ -152,36 +152,44 @@ function printInfo(title, value, id) {
 function printImage(data) {
   let carouselIndicators = "";
   let carouselInner = "";
-  $.each(data, function (index, ele) {
-    if (index == 0) {
-      carouselIndicators += `<button
-            type="button"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide-to="${index}"
-            class="active"
-            aria-current="true"
-            aria-label="Slide${index + 1}"
-          ></button>`;
+  if (data == "") {
+    printalternativeImage();
+  } else {
+    $.each(data.item, function (index, ele) {
+      if (index == 0) {
+        carouselIndicators += `<button
+              type="button"
+              data-bs-target="#carouselExampleIndicators"
+              data-bs-slide-to="${index}"
+              class="active"
+              aria-current="true"
+              aria-label="Slide${index + 1}"
+            ></button>`;
 
-      carouselInner += `<div class="carousel-item active">
-            <img src="${ele.originimgurl}" class="d-block w-100" alt="${ele.title}" />
-          </div>`;
-    } else {
-      carouselIndicators += `<button
-            type="button"
-            data-bs-target="#carouselExampleIndicators"
-            data-bs-slide-to="${index}"
-            aria-label="Slide${index + 1}"
-          ></button>`;
+        carouselInner += `<div class="carousel-item active">
+              <img src="${ele.originimgurl}" class="d-block w-100" alt="${ele.title}" />
+            </div>`;
+      } else {
+        carouselIndicators += `<button
+              type="button"
+              data-bs-target="#carouselExampleIndicators"
+              data-bs-slide-to="${index}"
+              aria-label="Slide${index + 1}"
+            ></button>`;
 
-      carouselInner += `<div class="carousel-item">
-            <img src="${ele.originimgurl}" class="d-block w-100" alt="${ele.title}" />
-          </div>`;
-    }
-  });
+        carouselInner += `<div class="carousel-item">
+              <img src="${ele.originimgurl}" class="d-block w-100" alt="${ele.title}" />
+            </div>`;
+      }
+    });
 
-  $(".carousel-indicators").html(carouselIndicators);
-  $(".carousel-inner").html(carouselInner);
+    $(".carousel-indicators").html(carouselIndicators);
+    $(".carousel-inner").html(carouselInner);
+  }
+}
+function printalternativeImage(){
+  let output = `<img width="100%" src="img/touristAttraction/no-image.jpeg">`
+  $("#carouselExampleIndicators").html(output);
 }
 
 function printMap(mapx, mapy) {
@@ -209,6 +217,7 @@ function printMap(mapx, mapy) {
   var zoomControl = new kakao.maps.ZoomControl();
   map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 }
+
 
 function setLike(likeIcon) {
   if (likeIcon.children[0].classList.contains("fa-regular")) {
